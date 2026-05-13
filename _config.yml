@@ -18,10 +18,10 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: 大白花的博客
-email:
+title: bijingdabaihua's blog
+email: bijingdabaihua@gmail.com
 description: >-
-  大白花的个人博客，记录技术、生活和思考。
+  bijingdabaihua's personal blog, recording tech, life, and thoughts.
 baseurl: ""
 url: "https://bijingdabaihua.github.io"
 twitter_username:
