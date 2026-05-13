@@ -26,6 +26,7 @@ baseurl: ""
 url: "https://bijingdabaihua.github.io"
 twitter_username:
 github_username:  bijingdabaihua
+avatar: /assets/images/avatar.jpg
 
 # Build settings
 theme: minima
