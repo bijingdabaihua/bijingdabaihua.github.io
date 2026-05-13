@@ -12,6 +12,14 @@
 
 - 昵称统一使用 bijingdabaihua，不得出现"大白花"或其他中文变体
 
+## 技术栈
+
+- **框架**: Next.js 16 (App Router) + TypeScript
+- **样式**: Tailwind CSS v4
+- **部署**: Vercel
+- **内容**: Markdown 文件 (`content/posts/`)，gray-matter 解析 frontmatter
+- **密码保护**: crypto (Node 内置) + httpOnly cookie
+
 ## 样式约定
 
 - 主题色：`#5b7fff`（柔和的蓝色）
@@ -25,9 +33,17 @@
 
 ## 文件结构
 
-- `_includes/` - 可复用的模板片段（如 header）
-- `_layouts/` - 页面布局模板（如 home, post, page）
-- `_sass/` - 自定义样式文件
-- `assets/` - 静态资源（图片、样式表等）
-- `_posts/` - 博客文章（Markdown 格式，文件名: `YYYY-MM-DD-title.markdown`）
+- `content/posts/` - 博客文章（Markdown 格式，文件名: `YYYY-MM-DD-title.md`）
+- `src/app/` - Next.js App Router 页面
+- `src/components/` - React 组件
+- `src/lib/` - 工具函数（posts.ts, auth.ts, constants.ts）
+- `public/images/` - 静态资源（头像等）
+- `.env.local` - 本地环境变量（BLOG_PASSWORD，不入库）
+
+## 私密文章
+
+- 文章 frontmatter 加 `private: true` 即为私密
+- 访问私密文章需要输入密码 `BLOG_PASSWORD`
+- 密码验证通过后设置 httpOnly cookie（3 天有效）
+- 本地 `.env.local` 中配置密码，Vercel 在 Environment Variables 中配置
 
