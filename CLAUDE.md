@@ -8,6 +8,10 @@
   - 谷歌邮箱：bijingdabaihua@gmail.com
   - QQ邮箱：2397809455@qq.com
 
+## 命名约定
+
+- 昵称统一使用 bijingdabaihua，不得出现"大白花"或其他中文变体
+
 ## 样式约定
 
 - 主题色：`#5b7fff`（柔和的蓝色）

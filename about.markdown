@@ -10,7 +10,7 @@ permalink: /about/
   <h2>bijingdabaihua</h2>
 
   <p style="color: #6c757d; font-size: 1.05rem; max-width: 500px; margin: 0 auto;">
-    大白花的个人博客。记录技术、生活和思考。
+    bijingdabaihua's personal blog, recording tech, life, and thoughts.
   </p>
 
   <hr style="border: none; border-top: 1px solid #eee; margin: 30px auto; max-width: 200px;">
