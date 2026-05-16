@@ -3,10 +3,8 @@
 ## 基本约定
 
 - 昵称：bijingdabaihua（必须全英文，不得使用中文或拼音变体）
-- 头像：`/assets/images/avatar.jpg`，网站中用 `site.avatar` 引用
-- 邮箱：
-  - 谷歌邮箱：bijingdabaihua@gmail.com
-  - QQ邮箱：2397809455@qq.com
+- 头像：`/images/avatar.jpg`，网站中用 `site.avatar` 引用
+- 邮箱：2397809455@qq.com
 
 ## 命名约定
 
@@ -16,9 +14,9 @@
 
 - **框架**: Next.js 16 (App Router) + TypeScript
 - **样式**: Tailwind CSS v4
-- **部署**: Vercel
-- **内容**: Markdown 文件 (`content/posts/`)，gray-matter 解析 frontmatter
-- **密码保护**: crypto (Node 内置) + httpOnly cookie
+- **部署**: GitHub Pages（静态导出 `output: "export"`）
+- **CI/CD**: GitHub Actions（`.github/workflows/deploy.yml`）
+- **内容**: Markdown 文件（`content/posts/`），gray-matter 解析 frontmatter
 
 ## 样式约定
 
@@ -36,14 +34,11 @@
 - `content/posts/` - 博客文章（Markdown 格式，文件名: `YYYY-MM-DD-title.md`）
 - `src/app/` - Next.js App Router 页面
 - `src/components/` - React 组件
-- `src/lib/` - 工具函数（posts.ts, auth.ts, constants.ts）
+- `src/lib/` - 工具函数（posts.ts, constants.ts）
 - `public/images/` - 静态资源（头像等）
-- `.env.local` - 本地环境变量（BLOG_PASSWORD，不入库）
 
-## 私密文章
+## 部署
 
-- 文章 frontmatter 加 `private: true` 即为私密
-- 访问私密文章需要输入密码 `BLOG_PASSWORD`
-- 密码验证通过后设置 httpOnly cookie（3 天有效）
-- 本地 `.env.local` 中配置密码，Vercel 在 Environment Variables 中配置
-
+- 本项目为纯静态站点（无动态功能）
+- push 到 `main` 分支后，GitHub Actions 自动构建并部署到 GitHub Pages
+- 访问地址：`https://bijingdabaihua.github.io`

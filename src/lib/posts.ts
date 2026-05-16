@@ -24,7 +24,6 @@ export function getAllPosts(): PostMeta[] {
       title: data.title || slug,
       date: data.date ? new Date(data.date).toISOString() : '',
       categories: data.categories || [],
-      private: data.private === true,
     }
   })
 
@@ -46,7 +45,6 @@ export function getPostBySlug(slug: string): Post | null {
     title: data.title || slug,
     date: data.date ? new Date(data.date).toISOString() : '',
     categories: data.categories || [],
-    private: data.private === true,
     content,
   }
 }

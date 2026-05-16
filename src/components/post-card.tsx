@@ -16,15 +16,9 @@ export default function PostCard({ post }: { post: PostMeta }) {
           href={`/posts/${post.slug}`}
           className="text-lg font-semibold text-text-primary no-underline hover:text-brand transition-colors"
         >
-          {post.private && <span className="mr-1.5" title="Password protected">🔒</span>}
           {post.title}
         </Link>
       </h3>
-      {post.private && (
-        <span className="inline-block text-xs text-text-secondary bg-gray-100 px-2 py-0.5 rounded mt-1">
-          Password protected
-        </span>
-      )}
     </article>
   )
 }
