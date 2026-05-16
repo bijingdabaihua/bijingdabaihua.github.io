@@ -3,7 +3,6 @@ export interface PostMeta {
   title: string
   date: string
   categories: string[]
-  private: boolean
 }
 
 export interface Post extends PostMeta {

@@ -1,9 +1,6 @@
 import { notFound } from 'next/navigation'
 import { getPostBySlug, getAllSlugs } from '@/lib/posts'
-import { isAuthenticated } from '@/lib/auth'
 import PostBody from '@/components/post-body'
-import PasswordForm from '@/components/password-form'
-import { siteConfig } from '@/lib/constants'
 
 export async function generateStaticParams() {
   const slugs = getAllSlugs()
@@ -28,14 +25,9 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
     day: 'numeric',
   })
 
-  const authenticated = post.private ? await isAuthenticated() : true
-
   return (
     <article className="max-w-[860px] mx-auto">
       <header className="mb-8 pb-6 border-b border-border-light">
-        {post.private && (
-          <span className="inline-block mb-3 text-sm text-text-secondary" title="Password protected">🔒 Protected</span>
-        )}
         <h1 className="text-3xl sm:text-4xl font-bold text-text-dark leading-tight mb-3">
           {post.title}
         </h1>
@@ -51,11 +43,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         )}
       </header>
 
-      {authenticated ? (
-        <PostBody content={post.content} />
-      ) : (
-        <PasswordForm slug={slug} />
-      )}
+      <PostBody content={post.content} />
     </article>
   )
 }
