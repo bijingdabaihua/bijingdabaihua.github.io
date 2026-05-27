@@ -18,6 +18,9 @@ export default function Header() {
           <Link href="/" className="text-text-secondary hover:text-brand transition-colors text-sm font-medium no-underline">
             Home
           </Link>
+          <Link href="/garden" className="text-text-secondary hover:text-brand transition-colors text-sm font-medium no-underline">
+            Garden
+          </Link>
           <Link href="/about" className="text-text-secondary hover:text-brand transition-colors text-sm font-medium no-underline">
             About
           </Link>
