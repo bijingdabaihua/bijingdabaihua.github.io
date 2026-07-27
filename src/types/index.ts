@@ -27,6 +27,58 @@ export interface Note extends NoteMeta {
 
 export type BookStatus = 'reading' | 'completed' | 'wishlist' | 'recommended'
 
+// ─── Resume types ───
+
+export interface ResumePersonalInfo {
+  name: string
+  title: string
+  email: string
+  phone?: string
+  location?: string
+  website?: string
+  github?: string
+  linkedin?: string
+}
+
+export interface ResumeSkillCategory {
+  category: string
+  items: string[]
+}
+
+export interface ResumeExperience {
+  company: string
+  position: string
+  startDate: string
+  endDate?: string
+  highlights: string[]
+}
+
+export interface ResumeEducation {
+  school: string
+  degree: string
+  major?: string
+  startDate: string
+  endDate?: string
+}
+
+export interface ResumeProject {
+  name: string
+  description: string
+  tech: string[]
+  url?: string
+}
+
+export interface ResumeData {
+  personalInfo: ResumePersonalInfo
+  summary: string
+  skills: ResumeSkillCategory[]
+  experience: ResumeExperience[]
+  education: ResumeEducation[]
+  projects: ResumeProject[]
+}
+
+// ─── Book types ───
+
 export interface Book {
   // identity
   id: string

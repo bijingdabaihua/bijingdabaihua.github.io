@@ -36,6 +36,9 @@ yarn-error.log*
 # obsidian
 .obsidian/
 
+# resume plain data (contains unencrypted personal info)
+src/lib/resume-data.plain.ts
+
 # claude
 .claude/
 

@@ -27,6 +27,9 @@ export default function Header() {
           <Link href="/books" className="text-text-secondary hover:text-brand transition-colors text-sm font-medium no-underline">
             Books
           </Link>
+          <Link href="/resume" className="text-text-secondary hover:text-brand transition-colors text-sm font-medium no-underline">
+            Resume
+          </Link>
           <Link href="/about" className="text-text-secondary hover:text-brand transition-colors text-sm font-medium no-underline">
             About
           </Link>
