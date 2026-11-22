@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { siteConfig } from '@/lib/constants'
+import { featuredProject, siteConfig } from '@/lib/constants'
 
 export default function Header() {
   return (
@@ -27,10 +27,20 @@ export default function Header() {
           </Link>
           <Link
             href="/writing/"
-            className="no-underline transition-colors hover:text-text-primary"
+            className="hidden no-underline transition-colors hover:text-text-primary min-[360px]:inline"
           >
             Writing
           </Link>
+          {featuredProject.demo && (
+            <a
+              href={featuredProject.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-accent no-underline transition-colors hover:text-text-primary"
+            >
+              Demo ↗
+            </a>
+          )}
           <a
             href={`https://github.com/${siteConfig.github}`}
             target="_blank"
@@ -41,7 +51,7 @@ export default function Header() {
           </a>
           <a
             href={`mailto:${siteConfig.email}`}
-            className="hidden no-underline transition-colors hover:text-text-primary min-[360px]:inline"
+            className="hidden no-underline transition-colors hover:text-text-primary sm:inline"
           >
             Email
           </a>
