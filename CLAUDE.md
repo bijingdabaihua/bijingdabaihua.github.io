@@ -2,7 +2,7 @@
 
 ## 定位
 
-这是 bijingdabaihua 的个人作品集 + 技术博客，用于求职和展示项目。主角是 Prism（WebGPU 路径追踪器），其次是浏览器扩展、本地 AI 工具和开发工具。页面以中文为主，技术名词保留英文。
+这是 bijingdabaihua 的个人主页与技术博客，不是求职作品集。先像一个“人”的站点：自我介绍、项目、文章、想法。求职是附带结果，不要把它做成首页的主叙事。
 
 线上地址：<https://bijingdabaihua.github.io/>
 Prism Demo：<https://bijingdabaihua.github.io/Prism/>
@@ -10,31 +10,44 @@ Prism Demo：<https://bijingdabaihua.github.io/Prism/>
 ## 基本约定
 
 - 昵称：`bijingdabaihua`，全英文，不得出现中文或拼音变体。
-- 头像：`/images/avatar.jpg`，用 `siteConfig.avatar` 引用。
 - 联系方式以 `src/lib/constants.ts` 的 `siteConfig` 为准；不要在未确认的情况下改邮箱或加其他联系方式。
-- 不添加访问统计、Cookie、第三方字体或外部 UI 库。
+- 不添加访问统计、Cookie、第三方字体、外部 UI 库或评论系统。
 
 ## 技术栈
 
 - Next.js 16（App Router）+ React 19 + TypeScript
 - Tailwind CSS v4
-- Markdown：`content/posts/` + gray-matter 解析 frontmatter
+- Markdown：`content/posts/` + gray-matter
 - 渲染：react-markdown + remark-gfm + rehype-highlight
 - 部署：静态导出（`output: 'export'`）到 `out/`，GitHub Actions 发布到 GitHub Pages
 
-## 设计
+## 审美与布局
 
-- 深色编辑风：页面 `#0a0a0b`，正文 `#ededed`，次要文字 `#9a9aa1`，暖色强调 `#e6b98a`。
-- 颜色、字体都定义在 `src/app/globals.css` 的 `@theme inline` 里，用 `bg-page`、`text-text-secondary`、`border-border-light` 这类 token，不写死新的十六进制颜色。
-- 最大内容宽度 1120px；阅读页 760px；移动端左右 24px。
-- 标题紧凑（负字距），元信息用等宽字体、大写、宽字距。
-- 动效克制：只保留首屏 `animate-rise` 和 hover 过渡；必须尊重 `prefers-reduced-motion`。
-- 不引入大面积渐变、玻璃拟态卡片或装饰性插画。项目截图是主要的视觉元素。
+当前方向是**纸页/笔记本**，不是产品落地页：
+
+- 背景 `#f7f4ed`，正文 `#24211c`，次要文字 `#5f5a51`，强调色 `#8f5a3c`。
+- 标题用衬线字体（`font-serif`，Songti SC / Noto Serif SC 栈），正文用系统无衬线；日期和少量元信息用等宽。
+- 内容栏 720px，文章阅读栏 680px；左右留白要大，页面要安静。
+- 首页顺序：自我介绍 → 写的 → 做的 → 关于。写作放在项目前面。
+- 分区标题就用中文的“写的 / 做的 / 关于”，不要加全大写英文小标题、编号或装饰线。
+- 首页最多放一张图（Prism 的小缩略图）；其余项目用文字列表，不用卡片网格。
+- 链接克制：正文内用下划线，导航/操作链接默认无下划线，hover 变强调色。
+- 动效只保留 hover 过渡；尊重 `prefers-reduced-motion`。
+
+**不要使用**：
+
+- “Open to opportunities”、状态点、求职 CTA、“有合适的机会聊聊”这类话术。
+- “Selected Work / Featured / Technical Notes / Try it / 04 projects”这类模板标签。
+- 技术标签胶囊、项目编号、大圆角卡片、大号填充按钮、悬浮玻璃导航。
+- 简历式技能表（Languages / Skills 网格）。兴趣和技术栈放进自然段。
+- 首页大图轮播或全屏 Hero 图。
+
+如果以后要放简历，做成一个安静的链接或独立页面，不要改变首页的气质。
 
 ## 路由与数据
 
-- `/`：Hero、精选项目（Prism）、其他项目、About、Writing、Contact。
-- `/projects/[slug]/`：项目详情，`demo` 存在时给主按钮和 Try it 区块。
+- `/`：自我介绍、最近文章、项目列表、关于与联系方式。
+- `/projects/[slug]/`：项目详情，正文 + 实现细节 + Demo/源码/技术笔记。
 - `/writing/`：文章列表；`/writing/[slug]/`：文章详情。
 - 项目数据集中在 `src/lib/constants.ts`；文章由 `src/lib/posts.ts` 从 `content/posts/` 读取。
 - 动态路由必须提供 `generateStaticParams`，并保持 `dynamicParams = false`，否则静态导出会多出空路径。
@@ -54,8 +67,9 @@ tags: [WebGPU, 图形学]
 
 - 文章要解释「为什么」和取舍，不写只复述 API 的教程。
 - 技术细节必须和 Prism 仓库的实际实现一致；不确定的先去看代码。
-- 项目描述要具体：写清楚做了什么、怎么做的，不用「高性能」「现代化」这类空词。
-- 新增项目：在 `src/lib/constants.ts` 加 `Project`，封面放 `public/images/`，详情页自动生成。
+- 项目描述要具体，写清楚做了什么、怎么做的，不用「高性能」「现代化」这类空词。
+- 新增项目：在 `src/lib/constants.ts` 加 `Project`（`description`、`body`、`tech`），封面放 `public/images/`，详情页自动生成。
+- 技术文章链接通过 `Project.post` 关联。
 
 ## 部署
 

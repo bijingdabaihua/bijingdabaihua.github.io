@@ -1,280 +1,185 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import ButtonLink from '@/components/button-link'
-import ProjectCard from '@/components/project-card'
-import { featuredProject, otherProjects, siteConfig } from '@/lib/constants'
+import { siteConfig } from '@/lib/constants'
 import { formatPostDate, getAllPosts } from '@/lib/posts'
-
-const facts = [
-  ['Languages', 'TypeScript · Python · Rust (learning)'],
-  ['Graphics', 'WebGPU · WGSL · CUDA'],
-  ['Web', 'React · Next.js · Vite'],
-  ['Tools', 'Git · GitHub Actions · Node.js'],
-] as const
-
-function TechTag({ children }: { children: string }) {
-  return (
-    <span className="rounded-full border border-border-light px-3 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-text-secondary">
-      {children}
-    </span>
-  )
-}
 
 export default function Home() {
   const posts = getAllPosts()
 
   return (
-    <div>
-      <section className="mx-auto w-full max-w-[1120px] px-6 pb-16 pt-16 sm:px-8 sm:pb-24 sm:pt-24">
-        <div className="flex items-start justify-between gap-12">
-          <div className="animate-rise min-w-0">
-            <p className="flex items-center gap-2.5 font-mono text-[10px] uppercase tracking-[0.2em] text-text-secondary">
-              <span className="h-1.5 w-1.5 rounded-full bg-positive shadow-[0_0_12px] shadow-positive/50" />
-              Open to opportunities
-            </p>
+    <div className="mx-auto w-full max-w-[720px] px-6">
+      <section className="pb-12 pt-16 sm:pt-24">
+        <h1 className="font-serif text-[clamp(1.9rem,5vw,2.7rem)] font-semibold leading-[1.35] tracking-[-0.02em] text-text-primary">
+          <span className="block sm:inline">你好，</span><span className="block sm:inline">我是 {siteConfig.name}。</span>
+        </h1>
 
-            <h1 className="mt-7 break-words text-[clamp(1.8rem,7.5vw,5rem)] font-semibold leading-[0.95] tracking-[-0.045em] text-text-primary">
-              {siteConfig.name}
-            </h1>
+        <p className="mt-6 text-[1.15rem] leading-9 text-text-primary sm:text-[1.25rem]">
+          写代码，也写点东西。对图形渲染、Web 和工具有兴趣。
+        </p>
 
-            <p className="mt-7 max-w-[620px] text-[clamp(1.35rem,3.2vw,2.1rem)] font-medium leading-[1.2] tracking-[-0.02em] text-text-primary">
-              在浏览器里，从零把光算出来。
-            </p>
+        <p className="mt-4 max-w-[620px] text-[15px] leading-8 text-text-secondary">
+          这里放我做过的东西、写过的笔记，以及一些还没想明白的问题。最近在做{' '}
+          <Link href="/projects/prism/" className="link">
+            Prism
+          </Link>{' '}
+          —— 一个从零写的 WebGPU 路径追踪器。
+        </p>
 
-            <p className="mt-6 max-w-[600px] text-pretty text-[15px] leading-7 text-text-secondary">
-              软件工程师，关注图形渲染、前端工程和开发者工具。喜欢从底层理解系统，再把它做成好用的东西。最近在做 Prism —— 不依赖 three.js 的 WebGPU 路径追踪器。
-            </p>
-
-            <div className="mt-9 flex flex-wrap gap-3">
-              <ButtonLink href="#work" variant="primary">
-                查看作品 ↓
-              </ButtonLink>
-              <ButtonLink href={`https://github.com/${siteConfig.github}`}>
-                GitHub ↗
-              </ButtonLink>
-              <ButtonLink href={`mailto:${siteConfig.email}`}>
-                Email
-              </ButtonLink>
-            </div>
-          </div>
-
-          <div className="hidden shrink-0 lg:block">
-            <div className="h-24 w-24 overflow-hidden rounded-full border border-border-light">
-              <Image
-                src={siteConfig.avatar}
-                alt={`${siteConfig.name} 的头像`}
-                width={96}
-                height={96}
-                className="h-full w-full scale-[1.7] object-cover grayscale"
-              />
-            </div>
-            <p className="mt-3 text-right font-mono text-[10px] uppercase tracking-[0.16em] text-text-faint">
-              WebGPU / WGSL
-            </p>
-          </div>
-        </div>
+        <p className="mt-5 text-[12px] leading-6 text-text-faint">
+          最近在整理 Prism 的实现笔记，也在学 Rust。
+        </p>
       </section>
 
       <section
-        id="work"
-        className="mx-auto w-full max-w-[1120px] scroll-mt-20 px-6 sm:px-8"
+        id="writing"
+        className="scroll-mt-8 border-t border-border-light py-10"
       >
-        <div className="flex items-end justify-between border-b border-border-light pb-4">
-          <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-text-secondary">
-            Selected Work
-          </h2>
-          <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-text-faint">
-            {String(siteConfig.projects.length).padStart(2, '0')} projects
-          </span>
+        <div className="flex items-baseline justify-between">
+          <h2 className="font-serif text-[1.25rem] text-text-primary">写的</h2>
+          <Link href="/writing/" className="link-muted text-[12px]">
+            全部文章
+          </Link>
         </div>
 
-        <article className="mt-8">
-          {featuredProject.cover && (
-            <a
-              href={featuredProject.demo ?? `/projects/${featuredProject.slug}/`}
-              target={featuredProject.demo ? '_blank' : undefined}
-              rel={featuredProject.demo ? 'noopener noreferrer' : undefined}
-              aria-label={
-                featuredProject.demo
-                  ? `打开 ${featuredProject.name} 在线 Demo`
-                  : `查看 ${featuredProject.name}`
-              }
-              className="group relative block overflow-hidden rounded-2xl border border-border-light bg-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-            >
-              <Image
-                src={featuredProject.cover}
-                alt="Prism 渲染的青花瓷罐搁在夕阳下的砂土地面上"
-                width={1280}
-                height={720}
-                className="aspect-[16/9] w-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
-              />
-              {featuredProject.demo && (
-                <span className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-page/70 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-text-primary backdrop-blur-md">
-                  <span className="h-1.5 w-1.5 rounded-full bg-positive" />
-                  Live Demo ↗
+        {posts.length === 0 ? (
+          <p className="mt-6 text-[14px] text-text-secondary">还没写。</p>
+        ) : (
+          <ul className="mt-6 space-y-7">
+            {posts.slice(0, 3).map((post) => (
+              <li key={post.slug}>
+                <Link href={`/writing/${post.slug}/`} className="group block">
+                  <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+                    <h3 className="font-serif text-[1.15rem] leading-snug text-text-primary transition-colors group-hover:text-accent">
+                      {post.title}
+                    </h3>
+                    <time className="shrink-0 font-mono text-[11px] text-text-faint">
+                      {formatPostDate(post.date)}
+                    </time>
+                  </div>
+                  {post.summary && (
+                    <p className="mt-1.5 text-[14px] leading-7 text-text-secondary">
+                      {post.summary}
+                    </p>
+                  )}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+
+      <section
+        id="projects"
+        className="scroll-mt-8 border-t border-border-light py-10"
+      >
+        <h2 className="font-serif text-[1.25rem] text-text-primary">做的</h2>
+
+        <div className="mt-6 space-y-8">
+          {siteConfig.projects.map((project) => (
+            <article key={project.slug}>
+              <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+                <h3 className="font-serif text-[1.15rem] leading-snug">
+                  <Link
+                    href={`/projects/${project.slug}/`}
+                    className="title-link no-underline"
+                  >
+                    {project.name}
+                  </Link>
+                </h3>
+                <span className="shrink-0 font-mono text-[11px] text-text-faint">
+                  {project.tech.slice(0, 3).join(' · ')}
                 </span>
-              )}
-            </a>
-          )}
-
-          <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
-            <div>
-              <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
-                <span>01</span>
-                <span className="h-px w-8 bg-accent/50" />
-                <span>Featured</span>
               </div>
 
-              <h3 className="mt-3 text-3xl font-semibold tracking-tight text-text-primary sm:text-4xl">
-                <Link
-                  href={`/projects/${featuredProject.slug}/`}
-                  className="no-underline transition-colors hover:text-accent"
-                >
-                  {featuredProject.name}
-                </Link>
-              </h3>
+              <div
+                className={
+                  project.cover
+                    ? 'mt-3 grid gap-4 sm:grid-cols-[1fr_200px] sm:items-start'
+                    : 'mt-2'
+                }
+              >
+                <div>
+                  <p className="text-[14px] leading-7 text-text-secondary">
+                    {project.description}
+                  </p>
+                  <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-[12px]">
+                    {project.demo && (
+                      <a
+                        href={project.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="link-muted"
+                      >
+                        在线 Demo ↗
+                      </a>
+                    )}
+                    <a
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="link-muted"
+                    >
+                      源码 ↗
+                    </a>
+                    {project.post && (
+                      <Link
+                        href={`/writing/${project.post}/`}
+                        className="link-muted"
+                      >
+                        技术笔记
+                      </Link>
+                    )}
+                  </div>
+                </div>
 
-              <p className="mt-3 max-w-[640px] text-[15px] leading-7 text-text-secondary">
-                {featuredProject.description}
-              </p>
-
-              <div className="mt-5 flex flex-wrap items-center gap-2">
-                {featuredProject.tech.map((tech) => (
-                  <TechTag key={tech}>{tech}</TechTag>
-                ))}
-                <Link
-                  href={`/projects/${featuredProject.slug}/`}
-                  className="ml-1 font-mono text-[11px] text-text-secondary underline decoration-border-light underline-offset-4 transition-colors hover:text-text-primary"
-                >
-                  技术细节 →
-                </Link>
+                {project.cover && (
+                  <Link
+                    href={`/projects/${project.slug}/`}
+                    aria-label={`查看 ${project.name} 项目`}
+                    className="block overflow-hidden rounded-sm border border-border-light"
+                  >
+                    <Image
+                      src={project.cover}
+                      alt={`${project.name} 的渲染图`}
+                      width={1280}
+                      height={720}
+                      className="aspect-[16/9] w-full object-cover"
+                    />
+                  </Link>
+                )}
               </div>
-            </div>
-
-            <div className="flex flex-wrap gap-3 lg:justify-end">
-              {featuredProject.demo && (
-                <ButtonLink href={featuredProject.demo} variant="primary">
-                  在线 Demo ↗
-                </ButtonLink>
-              )}
-              <ButtonLink href={featuredProject.url}>源码 ↗</ButtonLink>
-            </div>
-          </div>
-        </article>
-
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {otherProjects.map((project, index) => (
-            <ProjectCard
-              key={project.slug}
-              project={project}
-              index={index + 2}
-            />
+            </article>
           ))}
         </div>
       </section>
 
       <section
         id="about"
-        className="mx-auto mt-28 w-full max-w-[1120px] scroll-mt-20 border-t border-border-light px-6 pt-10 sm:px-8"
+        className="scroll-mt-8 border-t border-border-light py-10"
       >
-        <div className="grid gap-10 lg:grid-cols-[0.7fr_1fr]">
-          <div>
-            <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-text-secondary">
-              About
-            </h2>
-            <p className="mt-5 max-w-[360px] text-2xl font-medium leading-snug tracking-tight text-text-primary">
-              把系统拆开，
-              <br className="hidden sm:block" />
-              再重新搭起来。
-            </p>
-          </div>
+        <h2 className="font-serif text-[1.25rem] text-text-primary">关于</h2>
 
-          <div>
-            <p className="max-w-[620px] text-[15px] leading-7 text-text-secondary">
-              我是 bijingdabaihua，一名软件工程师。我的项目大多不是「用某个框架做一个页面」，而是从边界开始搭：渲染器从 BVH 和采样写起，浏览器扩展从本地词库和消息传递写起，听写工具从模型和热键写起。
-            </p>
-            <p className="mt-4 max-w-[620px] text-[15px] leading-7 text-text-secondary">
-              我关心的是系统能不能被理解、被验证、被继续改进。写代码之外，我也喜欢把做过的决定写下来 —— 这个站上的技术文章就是这些笔记。
-            </p>
-
-            <dl className="mt-8 grid gap-x-8 gap-y-4 sm:grid-cols-2">
-              {facts.map(([label, value]) => (
-                <div key={label}>
-                  <dt className="font-mono text-[10px] uppercase tracking-[0.16em] text-text-faint">
-                    {label}
-                  </dt>
-                  <dd className="mt-1 text-sm text-text-secondary">{value}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </div>
-      </section>
-
-      {posts.length > 0 && (
-        <section className="mx-auto mt-28 w-full max-w-[1120px] border-t border-border-light px-6 pt-10 sm:px-8">
-          <div className="flex items-end justify-between">
-            <h2 className="font-mono text-[10px] uppercase tracking-[0.2em] text-text-secondary">
-              Writing
-            </h2>
-            <Link
-              href="/writing/"
-              className="font-mono text-[11px] text-text-secondary underline decoration-border-light underline-offset-4 transition-colors hover:text-text-primary"
+        <div className="mt-5 max-w-[620px] space-y-4 text-[15px] leading-8 text-text-secondary">
+          <p>大部分时间在做两件事：把系统拆开看懂，再把它们做成能用的东西。</p>
+          <p>
+            对图形渲染、Web 和开发者工具有兴趣。平时主要写 TypeScript 和 Python，最近在学 Rust。这个站上的项目大多是从边界开始搭的；文章则是做项目时留下的笔记。
+          </p>
+          <p>
+            如果你也在做类似的事，或者只是想聊聊，可以写信到{' '}
+            <a href={`mailto:${siteConfig.email}`} className="link">
+              {siteConfig.email}
+            </a>
+            ，也可以在{' '}
+            <a
+              href={`https://github.com/${siteConfig.github}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link"
             >
-              全部文章 →
-            </Link>
-          </div>
-
-          <div className="mt-6 border-y border-border-light">
-            {posts.slice(0, 3).map((post) => (
-              <Link
-                key={post.slug}
-                href={`/writing/${post.slug}/`}
-                className="group grid gap-2 border-b border-border-light py-5 no-underline last:border-b-0 sm:grid-cols-[120px_1fr_24px] sm:items-baseline"
-              >
-                <time className="font-mono text-[11px] text-text-faint">
-                  {formatPostDate(post.date)}
-                </time>
-                <div>
-                  <h3 className="text-[15px] font-medium text-text-primary transition-colors group-hover:text-accent">
-                    {post.title}
-                  </h3>
-                  {post.summary && (
-                    <p className="mt-1 max-w-[680px] text-sm leading-6 text-text-secondary">
-                      {post.summary}
-                    </p>
-                  )}
-                </div>
-                <span className="hidden text-right font-mono text-[12px] text-text-faint transition-transform group-hover:translate-x-0.5 sm:block">
-                  →
-                </span>
-              </Link>
-            ))}
-          </div>
-        </section>
-      )}
-
-      <section className="mx-auto mt-28 w-full max-w-[1120px] border-t border-border-light px-6 pb-6 pt-10 sm:px-8">
-        <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-text-secondary">
-          Contact
-        </p>
-        <div className="mt-4 flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <h2 className="text-3xl font-semibold tracking-tight text-text-primary sm:text-4xl">
-              有合适的机会，聊聊？
-            </h2>
-            <p className="mt-3 max-w-[540px] text-sm leading-6 text-text-secondary">
-              我在寻找软件工程方向的机会，尤其是图形、前端或开发者工具相关的团队。也欢迎交流 WebGPU、渲染器，或任何你觉得有意思的项目。
-            </p>
-          </div>
-          <div className="flex shrink-0 flex-wrap gap-3">
-            <ButtonLink href={`mailto:${siteConfig.email}`} variant="primary">
-              发邮件 ↗
-            </ButtonLink>
-            <ButtonLink href={`https://github.com/${siteConfig.github}`}>
-              GitHub ↗
-            </ButtonLink>
-          </div>
+              GitHub
+            </a>{' '}
+            找到我。
+          </p>
         </div>
       </section>
     </div>

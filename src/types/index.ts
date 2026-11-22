@@ -2,11 +2,13 @@ export interface Project {
   slug: string
   name: string
   description: string
+  body: string[]
   url: string
   demo?: string
   cover?: string
   tech: string[]
   highlights?: string[]
+  post?: string
 }
 
 export interface PostMeta {

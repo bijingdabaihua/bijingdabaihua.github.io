@@ -1,10 +1,10 @@
 # bijingdabaihua.github.io
 
-个人作品集与技术博客，用于展示项目、记录实现细节。
+个人主页与技术博客：项目、文章，以及一些还没想明白的问题。
 
 - 首页：<https://bijingdabaihua.github.io/>
 - Prism 在线 Demo：<https://bijingdabaihua.github.io/Prism/>
-- 技术笔记：<https://bijingdabaihua.github.io/writing/>
+- 文章：<https://bijingdabaihua.github.io/writing/>
 
 ## 技术栈
 
@@ -54,15 +54,17 @@ tags: [WebGPU, 图形学]
   slug: 'project-slug',
   name: 'Project',
   description: '一句话说明',
+  body: ['项目详情页的正文段落'],
   url: 'https://github.com/...',
   demo: 'https://...',      // 可选
   cover: '/images/...jpg',  // 可选
   tech: ['TypeScript'],
-  highlights: ['技术要点'], // 可选，详情页展示
+  highlights: ['实现细节'], // 可选
+  post: 'article-slug',     // 可选，关联技术文章
 }
 ```
 
-封面图放 `public/images/`。Prism 的详情页和首页会自动使用 `demo` 作为主按钮。
+首页只展示前三个技术词和一句话说明；详情页再展开 `body` 和 `highlights`。封面图放 `public/images/`。
 
 ## 部署
 
@@ -74,9 +76,9 @@ tags: [WebGPU, 图形学]
 
 ```text
 content/posts/          Markdown 文章
-public/images/          头像、项目截图
-src/app/                路由：首页 / 项目详情 / 写作 / 404
-src/components/         Header / Footer / 卡片 / Markdown 渲染
+public/images/          项目截图
+src/app/                路由：首页 / 项目详情 / 文章 / 404
+src/components/         Header / Footer / Markdown 渲染
 src/lib/constants.ts    站点信息与项目数据
 src/lib/posts.ts        读取 content/posts 下的文章
 src/types/index.ts      Project / Post 类型
@@ -85,4 +87,4 @@ src/types/index.ts      Project / Post 类型
 ## 注意
 
 - 不要把 `src/lib/resume-data.plain.ts` 提交到仓库；它包含未加密的个人信息。
-- 不要在未确认的情况下修改联系方式。
+- 联系方式以 `src/lib/constants.ts` 的 `siteConfig` 为准；不要在未确认的情况下修改。

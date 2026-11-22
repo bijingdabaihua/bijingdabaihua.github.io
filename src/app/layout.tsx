@@ -4,13 +4,11 @@ import Header from '@/components/header'
 import Footer from '@/components/footer'
 import { siteConfig } from '@/lib/constants'
 
-const title = `${siteConfig.name} — ${siteConfig.role}`
-
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: title,
-    template: `%s — ${siteConfig.name}`,
+    default: siteConfig.name,
+    template: `%s · ${siteConfig.name}`,
   },
   description: siteConfig.description,
   applicationName: siteConfig.name,
@@ -21,7 +19,7 @@ export const metadata: Metadata = {
     locale: 'zh_CN',
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title,
+    title: siteConfig.name,
     description: siteConfig.description,
     images: [
       {
@@ -34,7 +32,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title,
+    title: siteConfig.name,
     description: siteConfig.description,
     images: ['/images/prism.jpg'],
   },
@@ -50,7 +48,7 @@ export default function RootLayout({
       <body className="flex min-h-full flex-col">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-text-primary focus:px-4 focus:py-2 focus:text-sm focus:text-page"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-sm focus:bg-text-primary focus:px-4 focus:py-2 focus:text-sm focus:text-page"
         >
           跳到主要内容
         </a>
