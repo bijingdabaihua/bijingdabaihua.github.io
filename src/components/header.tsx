@@ -1,38 +1,50 @@
-import { siteConfig } from '@/lib/constants'
 import Link from 'next/link'
+import { siteConfig } from '@/lib/constants'
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-border-light shadow-sm">
-      <div className="max-w-[860px] mx-auto px-6 flex items-center justify-between h-16">
-        <Link href="/" className="flex items-center gap-2.5 font-semibold text-lg text-text-dark no-underline">
-          <img
-            src={siteConfig.avatar}
-            alt="avatar"
-            className="w-9 h-9 rounded-full object-cover border-2 border-brand"
-          />
-          {siteConfig.title}
+    <header className="sticky top-0 z-50 border-b border-border-light bg-page/85 backdrop-blur-md">
+      <div className="mx-auto flex h-16 w-full max-w-[1120px] items-center justify-between px-6 sm:px-8">
+        <Link
+          href="/"
+          className="group flex items-center gap-3 no-underline"
+        >
+          <span className="h-1.5 w-1.5 rounded-full bg-accent transition-transform group-hover:scale-150" />
+          <span className="font-mono text-[13px] tracking-tight text-text-primary">
+            {siteConfig.handle}
+          </span>
+          <span className="hidden font-mono text-[10px] uppercase tracking-[0.18em] text-text-faint sm:inline">
+            Graphics / Web
+          </span>
         </Link>
 
-        <nav className="flex items-center gap-6">
-          <Link href="/" className="text-text-secondary hover:text-brand transition-colors text-sm font-medium no-underline">
-            Home
+        <nav className="flex items-center gap-4 text-[12px] text-text-secondary sm:gap-7 sm:text-[13px]">
+          <Link
+            href="/#work"
+            className="hidden no-underline transition-colors hover:text-text-primary sm:inline"
+          >
+            Work
           </Link>
-          <Link href="/garden" className="text-text-secondary hover:text-brand transition-colors text-sm font-medium no-underline">
-            Garden
+          <Link
+            href="/writing/"
+            className="no-underline transition-colors hover:text-text-primary"
+          >
+            Writing
           </Link>
-          <Link href="/projects" className="text-text-secondary hover:text-brand transition-colors text-sm font-medium no-underline">
-            Projects
-          </Link>
-          <Link href="/books" className="text-text-secondary hover:text-brand transition-colors text-sm font-medium no-underline">
-            Books
-          </Link>
-          <Link href="/resume" className="text-text-secondary hover:text-brand transition-colors text-sm font-medium no-underline">
-            Resume
-          </Link>
-          <Link href="/about" className="text-text-secondary hover:text-brand transition-colors text-sm font-medium no-underline">
-            About
-          </Link>
+          <a
+            href={`https://github.com/${siteConfig.github}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="no-underline transition-colors hover:text-text-primary"
+          >
+            GitHub
+          </a>
+          <a
+            href={`mailto:${siteConfig.email}`}
+            className="hidden no-underline transition-colors hover:text-text-primary min-[360px]:inline"
+          >
+            Email
+          </a>
         </nav>
       </div>
     </header>

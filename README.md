@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# bijingdabaihua.github.io
 
-## Getting Started
+个人作品集与技术博客，用于展示项目、记录实现细节。
 
-First, run the development server:
+- 首页：<https://bijingdabaihua.github.io/>
+- Prism 在线 Demo：<https://bijingdabaihua.github.io/Prism/>
+- 技术笔记：<https://bijingdabaihua.github.io/writing/>
+
+## 技术栈
+
+- Next.js 16（App Router）+ React 19
+- Tailwind CSS v4
+- Markdown + gray-matter + react-markdown
+- 静态导出（`output: 'export'`），GitHub Pages + GitHub Actions
+
+## 开发
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
+npm run build      # 静态导出到 out/
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+本地预览构建结果：
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npx serve out
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 写文章
 
-## Learn More
+在 `content/posts/` 新建 Markdown 文件，文件名会成为 slug：
 
-To learn more about Next.js, take a look at the following resources:
+```markdown
+---
+title: 文章标题
+date: "2026-11-22"
+summary: 列表页和 SEO 用的一句话摘要。
+tags: [WebGPU, 图形学]
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+正文……
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+日期用引号包起来，避免 YAML 把它解析成 `Date` 对象。文章会自动出现在首页和 `/writing/`。
 
-## Deploy on Vercel
+## 项目
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+项目数据在 `src/lib/constants.ts`。新增项目时补一个 `Project`：
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```ts
+{
+  slug: 'project-slug',
+  name: 'Project',
+  description: '一句话说明',
+  url: 'https://github.com/...',
+  demo: 'https://...',      // 可选
+  cover: '/images/...jpg',  // 可选
+  tech: ['TypeScript'],
+  highlights: ['技术要点'], // 可选，详情页展示
+}
+```
+
+封面图放 `public/images/`。Prism 的详情页和首页会自动使用 `demo` 作为主按钮。
+
+## 部署
+
+推送到 `main` 后，`.github/workflows/deploy.yml` 会构建 `out/` 并通过 GitHub Pages 发布。
+
+该仓库是用户主页仓库（`bijingdabaihua.github.io`），站点挂在根路径 `/`；Prism 是另一个项目页，挂在 `/Prism/`。
+
+## 目录
+
+```text
+content/posts/          Markdown 文章
+public/images/          头像、项目截图
+src/app/                路由：首页 / 项目详情 / 写作 / 404
+src/components/         Header / Footer / 卡片 / Markdown 渲染
+src/lib/constants.ts    站点信息与项目数据
+src/lib/posts.ts        读取 content/posts 下的文章
+src/types/index.ts      Project / Post 类型
+```
+
+## 注意
+
+- 不要把 `src/lib/resume-data.plain.ts` 提交到仓库；它包含未加密的个人信息。
+- 不要在未确认的情况下修改联系方式。

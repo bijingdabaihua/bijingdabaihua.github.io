@@ -1,18 +1,22 @@
-import Link from 'next/link'
+import ButtonLink from '@/components/button-link'
 
 export default function NotFound() {
   return (
-    <div className="bg-white rounded-xl p-10 sm:p-16 shadow-sm border border-[rgba(0,0,0,0.04)] text-center max-w-lg mx-auto mt-12">
-      <h1 className="text-6xl font-bold text-text-dark mb-4">404</h1>
-      <p className="text-text-secondary mb-8">
-        Page not found. The requested page could not be found.
+    <div className="mx-auto flex w-full max-w-[760px] flex-col items-start px-6 pb-24 pt-24 sm:px-8">
+      <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent">
+        404
       </p>
-      <Link
-        href="/"
-        className="inline-block px-6 py-2.5 bg-brand text-white rounded-lg text-sm font-medium hover:opacity-90 transition no-underline"
-      >
-        Back to Home
-      </Link>
+      <h1 className="mt-5 text-4xl font-semibold tracking-tight text-text-primary">
+        这里没有东西。
+      </h1>
+      <p className="mt-4 text-sm leading-6 text-text-secondary">
+        链接可能过期了，或者页面已经搬走。
+      </p>
+      <div className="mt-8">
+        <ButtonLink href="/" variant="primary">
+          ← 回到首页
+        </ButtonLink>
+      </div>
     </div>
   )
 }
