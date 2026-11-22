@@ -41,8 +41,8 @@ export default function Home() {
               在浏览器里，从零把光算出来。
             </p>
 
-            <p className="mt-6 max-w-[560px] text-[15px] leading-7 text-text-secondary">
-              软件工程师，关注图形渲染、前端工程和开发者工具。喜欢从底层理解系统，再把它们做成好用的东西。最近在做 Prism —— 一个不依赖 three.js 的 WebGPU 路径追踪器。
+            <p className="mt-6 max-w-[600px] text-pretty text-[15px] leading-7 text-text-secondary">
+              软件工程师，关注图形渲染、前端工程和开发者工具。喜欢从底层理解系统，再把它做成好用的东西。最近在做 Prism —— 不依赖 three.js 的 WebGPU 路径追踪器。
             </p>
 
             <div className="mt-9 flex flex-wrap gap-3">
